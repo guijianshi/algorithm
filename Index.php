@@ -6,13 +6,27 @@
  * Time: 9:09
  */
 define('DIR',__DIR__);
-include_once DIR.'/algorithm/Loader.php';
+include_once DIR . '/Loader.php';
 spl_autoload_register('\\algorithm\\Loader::autoload');
 $micro_time = new \algorithm\MircoTime();
-$unly_number = new \algorithm\UglyNumber\UglyNumber();
+
+
+
+$data = \algorithm\Data\Data::generateArr(10000);
+echo count($data)."\r\n";
+
 $time1 = $micro_time->getMircoTime();
-echo $unly_number->constructUgly(1500)."\r\n";
+isort($data);
 $time2 =  $micro_time->getMircoTime();
+
 echo 'cost time:'.($time2-$time1);
+
+
+function isort($arr)
+{
+    $isort = new \algorithm\Isort\Isort();
+    $arr = $isort->isort($arr);
+    return $arr;
+}
 
 
