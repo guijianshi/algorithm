@@ -11,9 +11,9 @@ namespace DataStructure\LinearList;
 
 abstract class LinearListAbstract
 {
-    private $data;
+    public $data;
 
-    private $length;
+    public $length;
 
     private $max_len;
 
@@ -43,12 +43,13 @@ abstract class LinearListAbstract
 
     public function locateElem($v)
     {
-
+        return $v;
     }
 
-    public function insert($k, $v)
+    public function insert($v)
     {
-
+        $this->length++;
+        return $v;
     }
 
     /**
@@ -60,8 +61,29 @@ abstract class LinearListAbstract
         return $v;
     }
 
+    /**
+     * @param mixed $length
+     */
+    public function setLengthIncrement()
+    {
+        $this->length++;
+    }
+
+
+
     public function getLength()
     {
-
+        return $this->length;
     }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getMaxLen()
+    {
+        return $this->max_len;
+    }
+
 }
