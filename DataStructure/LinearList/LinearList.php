@@ -8,75 +8,154 @@
 
 namespace DataStructure\LinearList;
 
-
+/**
+ * 链表顺序存储PHP实现
+ * Class LinearList
+ * @package DataStructure\LinearList
+ */
 class LinearList implements ListInterface
 {
-    public $data;
+    protected $data;
 
-    public $length;
+    protected $length;
 
-    public $max;
+    protected $max;
+
     /**
      * LinearList constructor.
-     * @param $data
+     * @param array $data
+     * @param int $max
      */
-    public function __construct($data = [], $max = 1000)
+    public function __construct(array $data = [], int $max = 1000)
     {
         $this->data = $data;
-
         $this->length = count($this->data);
-
         $this->max = $max;
     }
 
-    public function init($data = [])
+    /**
+     * 由构造函数代替
+     */
+    public function init()
     {
-        $this->data = $data;
+
     }
 
     public function isEmpty()
     {
-        return $this->length() ? false : true;
+        return $this->length ? false : true;
     }
 
-    public function getElem($k)
+    /**
+     * O(1)
+     * @param int $i
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getElem(int $i)
     {
-        // TODO: Implement getElem() method.
+        if ($i < 1 || $i > $this->length) {
+            throw new \Exception('参数越界');
+        }
+        return $this->data[$i - 1];
     }
 
+    /**
+     * O(n)
+     * @param $e
+     * @return int
+     * @throws \Exception
+     */
     public function find($e)
     {
         if ($this->isEmpty()) {
             throw new \Exception('空表');
         }
-        $len = $this->length();
         $i = 0;
-        while ($i < $len && $this->data[$i] != $e) {
+        while ($i < $this->length && $this->data[$i] != $e) {
             $i++;
         }
-        return $i >= $len ? -1 : $i + 1;
+        return $i >= $this->length ? -1 : $i + 1;
     }
 
-    public function insert($i, $e)
+    /**
+     * O(n)
+     * @param int $i
+     * @param $e
+     * @return bool
+     * @throws \Exception
+     */
+    public function insert(int $i, $e)
     {
-        if ($i < 1 || $i > $this->max) {
+        /*插入位置从头部到尾部之间,不得越界*/
+        if ($i < 1 || $i > $this->length + 1) {
             throw new \Exception('插入位置非法');
         }
-        for ($k = $i-1; $k < $this->length; $k++) {
-            $this->data[$k + 1] = $this->data[$k];
+        /*尾部到插入位置右移腾位*/
+        for ($k = $this->length; $k >= $i; $k--) {
+            $this->data[$k] = $this->data[$k - 1];
         }
-        $this->data[$i - 1] = $e;
+        $this->data[$k] = $e;
+        $this->length++;
         return true;
     }
 
-    public function delete($i)
+    /**
+     * O(n)
+     * @param int $i
+     * @return mixed
+     * @throws \Exception
+     */
+    public function delete(int $i)
     {
-        // TODO: Implement delete() method.
+        /*删除位置不得越界,界限为头部到尾部*/
+        if ($i < 1 || $i > $this->length) {
+            throw new \Exception('删除位置非法');
+        }
+
+        for ($k = $i; $k < $this->length; $k++) {
+            $this->data[$k - 1] = $this->data[$k];
+        }
+        $this->length--;
+        $e = $this->data[$k - 1];
+        unset($this->data[$k - 1]);
+        return $e;
     }
 
-    public function length()
+    public function getLength(): int
     {
-        return count($this->data);
+        return $this->length;
     }
 
+    /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMax(): int
+    {
+        return $this->max;
+    }
+
+    /**
+     * @param int $max
+     */
+    public function setMax(int $max)
+    {
+        $this->max = $max;
+    }
 }

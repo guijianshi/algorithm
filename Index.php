@@ -12,25 +12,23 @@ $micro_time = new \algorithm\MircoTime();
 
 
 $time1 = $micro_time->getMircoTime();
-find();
+testList();
 $time2 =  $micro_time->getMircoTime();
 
 echo 'cost time:'.($time2-$time1);
-
-
-function isort($arr)
+function testList()
 {
-    $isort = new \algorithm\Isort\Isort();
-    $arr = $isort->isort($arr);
-    return $arr;
+
+    $L = new \DataStructure\LinearList\PtrList();
+    $L->insert(1,1);
+    $L->insert(2,2);
+    $L->insert(3,4);
+    var_dump($L);
+
 }
 
-function find()
-{
-    $data = [1,5,8,10,15,20];
-    $L = new \DataStructure\LinearList\LinearList($data);
-    echo $L->insert(5,13);
-    print_r($L->data);
-}
+
+
+
 
 

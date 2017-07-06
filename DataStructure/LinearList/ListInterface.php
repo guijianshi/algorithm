@@ -11,15 +11,15 @@ namespace DataStructure\LinearList;
 
 interface ListInterface
 {
-    public function init($data);
+    public function init();
 
-    public function getElem($k);
+    public function getElem(int $k);
 
     public function find($e);
 
-    public function insert($i, $e);
+    public function insert(int $i, $e);
 
-    public function delete($i);
+    public function delete(int $i);
 
-    public function length();
+    public function getLength();
 }
