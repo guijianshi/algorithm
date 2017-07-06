@@ -31,12 +31,19 @@ class ListNode
     }
 }
 
-class PtrList
+/**
+ * 单向链表实现
+ * Class LinkList
+ * @package DataStructure\LinearList
+ */
+class LinkList
 {
     /* @var $header ListNode */
     private $header;
 
     private $length;
+
+    private $tail;
 
     public function __construct()
     {
@@ -52,7 +59,7 @@ class PtrList
     /**
      * O(n)
      * @param int $i
-     * @return null
+     * @return mixed
      * @throws \Exception
      */
     public function getElem(int $i)
@@ -60,10 +67,11 @@ class PtrList
         if ($i < 1 || $i > $this->length) {
             throw new \Exception('参数越界');
         }
+        $node = $this->header;
         for ($k = 1; $k <= $i; $k++) {
-            $node = $this->header->next;
+            $node = $node->next;
         }
-        return $node;
+        return $node->data;
     }
 
     /**
@@ -72,14 +80,15 @@ class PtrList
      * @return int
      * @throws \Exception
      */
-    public function find($e)
+    public function find($e): int
     {
         if ($this->isEmpty()) {
             throw new \Exception('空表');
         }
         $i = 1;
+        /* @var $current ListNode*/
         $current = $this->header->next;
-        while ($current->readNode() != $e || null != $current->next) {
+        while ($current->readNode() != $e && null != $current->next) {
             $i++;
             $current = $current->next;
         }
@@ -87,6 +96,7 @@ class PtrList
     }
 
     /**
+     * O(n)
      * @param int $i
      * @param $e
      * @return bool
@@ -99,20 +109,49 @@ class PtrList
             throw new \Exception('插入位置非法');
         }
         $node = new ListNode($e);
-        $precious = &$this->header;
-        for ($k = 1; $k < $i - 1; $k++) {
+        /*找到插入元素前一项*/
+        $precious = $this->header;
+        for ($k = 1; $k <= $i - 1; $k++) {
             $precious = $precious->next;
         }
         $node->next = $precious->next;
-        $precious->next = &$node;
+        $precious->next = $node;
         $this->length++;
         return true;
     }
 
+    /**
+     * O(n)
+     * @param $i
+     * @return mixed
+     * @throws \Exception
+     */
+    public function deleteItem($i)
+    {
+        if ($i < 1 || $i > $this->length) {
+            throw new \Exception('删除位置非法');
+        }
+        /*找到删除元素前一项*/
+        /* @var $precious,$delete_item ListNode*/
+        $precious = $this->header;
+        for ($k = 1; $k <= $i - 1; $k++) {
+            $precious = $precious->next;
+        }
+        $delete_item = $precious->next;
+        $precious->next = $delete_item->next;
+        $this->length--;
+        return $delete_item->data;
+    }
+
+    /**
+     * O(1)
+     * @param $e
+     * @return bool
+     */
     public function addHead($e)
     {
         $node = new ListNode($e);
-        $node->next = &$this->header->next;
+        $node->next = $this->header->next;
         $this->header->next = &$node;
         $this->length++;
         return true;
@@ -120,17 +159,22 @@ class PtrList
 
     public function addTail($e)
     {
+        /* @var $p ListNode*/
         $node = new ListNode($e);
         $p = &$this->header->next;
         while ($p->next) {
             $p = &$p->next;
         }
-        $p->next = $node;
+        $p->next = &$node;
         $this->length++;
         return true;
     }
 
-    public function getLength()
+    /**
+     * O(n)
+     * @return int
+     */
+    public function getLength(): int
     {
         $j = 0;
         $p = $this->header;
@@ -138,9 +182,12 @@ class PtrList
             $j++;
             $p = $p->next;
         }
+        return $j;
+//        return $this->length;
     }
 
     /**
+     * O(1)
      * @return ListNode
      */
     public function getHeader(): ListNode
@@ -148,6 +195,20 @@ class PtrList
         return $this->header;
     }
 
-
+    /**
+     * O(n)
+     * @param ListNode $node
+     * @return array
+     */
+    public function listItem(ListNode $node): array
+    {
+        $data = [];
+        $current = $node->next;
+        while ($current) {
+            $data[] = $current->data;
+            $current = $current->next;
+        }
+        return $data;
+    }
 }
 
