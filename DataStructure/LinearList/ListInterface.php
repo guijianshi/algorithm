@@ -11,7 +11,7 @@ namespace DataStructure\LinearList;
 
 interface ListInterface
 {
-    public function init();
+    public function __construct();
 
     public function getElem(int $k);
 

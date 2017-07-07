@@ -36,14 +36,12 @@ class ListNode
  * Class LinkList
  * @package DataStructure\LinearList
  */
-class LinkList
+class LinkList implements ListInterface
 {
     /* @var $header ListNode */
     private $header;
 
     private $length;
-
-    private $tail;
 
     public function __construct()
     {
@@ -86,7 +84,7 @@ class LinkList
             throw new \Exception('空表');
         }
         $i = 1;
-        /* @var $current ListNode*/
+        /* @var $current ListNode */
         $current = $this->header->next;
         while ($current->readNode() != $e && null != $current->next) {
             $i++;
@@ -115,24 +113,24 @@ class LinkList
             $precious = $precious->next;
         }
         $node->next = $precious->next;
-        $precious->next = $node;
+        $precious->next = &$node;
         $this->length++;
         return true;
     }
 
     /**
      * O(n)
-     * @param $i
+     * @param int $i
      * @return mixed
      * @throws \Exception
      */
-    public function deleteItem($i)
+    public function delete(int $i)
     {
         if ($i < 1 || $i > $this->length) {
             throw new \Exception('删除位置非法');
         }
         /*找到删除元素前一项*/
-        /* @var $precious,$delete_item ListNode*/
+        /* @var $precious ,$delete_item ListNode */
         $precious = $this->header;
         for ($k = 1; $k <= $i - 1; $k++) {
             $precious = $precious->next;
@@ -159,7 +157,7 @@ class LinkList
 
     public function addTail($e)
     {
-        /* @var $p ListNode*/
+        /* @var $p ListNode */
         $node = new ListNode($e);
         $p = &$this->header->next;
         while ($p->next) {
@@ -209,6 +207,18 @@ class LinkList
             $current = $current->next;
         }
         return $data;
+    }
+
+    public function clear()
+    {
+        $p = $this->header->next;
+        while ($p) {
+            $q = $p->next;
+            unset($p);
+            $p = $q;
+        }
+        $this->header->next = null;
+        return true;
     }
 }
 

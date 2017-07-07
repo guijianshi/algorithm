@@ -9,7 +9,7 @@
 namespace DataStructure\LinearList;
 
 /**
- * 链表顺序存储PHP实现
+ * 线性表顺序存储PHP实现
  * Class LinearList
  * @package DataStructure\LinearList
  */
@@ -26,19 +26,10 @@ class LinearList implements ListInterface
      * @param array $data
      * @param int $max
      */
-    public function __construct(array $data = [], int $max = 1000)
+    public function __construct(array $data = [])
     {
         $this->data = $data;
         $this->length = count($this->data);
-        $this->max = $max;
-    }
-
-    /**
-     * 由构造函数代替
-     */
-    public function init()
-    {
-
     }
 
     public function isEmpty()
@@ -112,12 +103,11 @@ class LinearList implements ListInterface
         if ($i < 1 || $i > $this->length) {
             throw new \Exception('删除位置非法');
         }
-
+        $e = $this->data[$i - 1];
         for ($k = $i; $k < $this->length; $k++) {
             $this->data[$k - 1] = $this->data[$k];
         }
         $this->length--;
-        $e = $this->data[$k - 1];
         unset($this->data[$k - 1]);
         return $e;
     }
@@ -135,27 +125,4 @@ class LinearList implements ListInterface
         return $this->data;
     }
 
-    /**
-     * @param array $data
-     */
-    public function setData(array $data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMax(): int
-    {
-        return $this->max;
-    }
-
-    /**
-     * @param int $max
-     */
-    public function setMax(int $max)
-    {
-        $this->max = $max;
-    }
 }
