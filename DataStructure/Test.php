@@ -11,6 +11,8 @@ namespace DataStructure;
 
 use DataStructure\LinearList\DoublyLinkedList;
 use DataStructure\LinearList\LinearList;
+use DataStructure\Stack\LinkedStack;
+use DataStructure\Stack\Stack;
 
 class Test
 {
@@ -67,5 +69,37 @@ class Test
         \Helper::dump($L->find(21));
         \Helper::dump($L->delete(2));
         \Helper::dump($L);
+    }
+
+    public static function testStack()
+    {
+        $S = new Stack();
+        $S->push(11);
+        $S->push(12);
+        $S->push(13);
+        $S->push(16);
+        $S->push(177);
+        $S->push(1188);
+        dump($S->getTop());
+        dump($S->pop($data));
+        dump($data);
+        $S->clear();
+        dump($S);
+    }
+
+    public static function testLinkedStack()
+    {
+        $S = new LinkedStack();
+        $S->push(1);
+        $S->push(8);
+        $S->push(9);
+        $S->push(11);
+        dump($S->getTop());
+        dump($S);
+        $S->pop($data);
+        dump($data);
+        dump($S);
+        $S->clear();
+        dump($S);
     }
 }

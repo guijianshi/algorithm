@@ -8,20 +8,26 @@
 define('DIR', __DIR__);
 include_once DIR . '/Loader.php';
 spl_autoload_register('\\algorithm\\Loader::autoload');
+define('OK', 1);
+define('NO', 0);
+define('YES', 1);
 $micro_time = new \algorithm\MircoTime();
-
 
 $time1 = $micro_time->getMircoTime();
 //testLinkList();
 //\DataStructure\Test::testLinkList();
-echo "<br/>";
-echo "<hr/>";
-echo "<br/>";
-\DataStructure\Test::testDoubleLinkedList();
 
+//\DataStructure\Test::testDoubleLinkedList();
+//echo \algorithm\Other\Other::fbi(20);
+\DataStructure\Test::testLinkedStack();
 $time2 = $micro_time->getMircoTime();
 
 echo '<br/><hr/>', 'cost time: ' . ($time2 - $time1) . ' s';
+
+function dump($data)
+{
+    Helper::dump($data);
+}
 
 
 

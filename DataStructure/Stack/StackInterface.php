@@ -11,15 +11,21 @@ namespace DataStructure\Stack;
 
 interface StackInterface
 {
-    public function createStack();
-
     public function init();
+
+    public function clear();
 
     public function isFull();
 
-    public function push();
+    public function getTop();
+
+    public function push($data);
+
+    public function pop(&$data);
 
     public function isEmpty();
 
-    public function pop();
+    public function getLength();
+
+
 }
