@@ -8,13 +8,18 @@
 
 namespace DataStructure\Queue;
 
+/**
+ * 要求要有一个空位置,以区分队列满和队列空的情况
+ * Class CircularQueue
+ * @package DataStructure\Queue
+ */
 class CircularQueue implements Queue
 {
     public $data;
 
     public $max;
 
-    public $frond;
+    public $front;
 
     public $rear;
 
@@ -22,14 +27,14 @@ class CircularQueue implements Queue
      * CircularQueue constructor.
      * @param $data
      * @param $max
-     * @param $frond
+     * @param $front
      * @param $rear
      */
-    public function __construct($data = [], $max = 100, $frond = 0, $rear = 0)
+    public function __construct($data = [], $max = 100, $front = 0, $rear = 0)
     {
         $this->data = $data;
         $this->max = $max;
-        $this->frond = $frond;
+        $this->front = $front;
         $this->rear = $rear;
     }
 
@@ -47,19 +52,19 @@ class CircularQueue implements Queue
 
     public function isEmpty()
     {
-        return $this->frond == $this->rear ? true : false;
+        return $this->front == $this->rear ? true : false;
     }
 
     public function getHead()
     {
-        if ($this->frond == $this->rear)
+        if ($this->front == $this->rear)
             throw new \Exception('队列为空');
-        return $this->data[$this->frond];
+        return $this->data[$this->front];
     }
 
     public function enQueue($data)
     {
-        if (($this->rear + 1) % $this->max == $this->frond)
+        if (($this->rear + 1) % $this->max == $this->front)
             throw new \Exception('队列已满');
         $this->data[$this->rear] = $data;
         $this->rear = ($this->rear + 1) % $this->max;
@@ -68,16 +73,16 @@ class CircularQueue implements Queue
 
     public function deQueue(&$data)
     {
-        if ($this->frond == $this->rear)
+        if ($this->front == $this->rear)
             throw new \Exception('队列为空');
-        $data = $this->data[$this->frond];
-        $this->frond = ($this->frond + 1) % $this->max;
+        $data = $this->data[$this->front];
+        $this->front = ($this->front + 1) % $this->max;
         return OK;
     }
 
     public function getLength()
     {
-        return ($this->rear - $this->frond + $this->max) % $this->max;
+        return ($this->rear - $this->front + $this->max) % $this->max;
     }
 
 }

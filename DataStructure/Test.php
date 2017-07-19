@@ -11,6 +11,8 @@ namespace DataStructure;
 
 use DataStructure\LinearList\DoublyLinkedList;
 use DataStructure\LinearList\LinearList;
+use DataStructure\Queue\CircularQueue;
+use DataStructure\Queue\LinkedQueue;
 use DataStructure\Stack\LinkedStack;
 use DataStructure\Stack\Stack;
 
@@ -101,5 +103,46 @@ class Test
         dump($S);
         $S->clear();
         dump($S);
+    }
+
+    public static function testCircularQueue()
+    {
+        $cir_queue = new CircularQueue([], 6);
+        $cir_queue->enQueue(1);
+        $cir_queue->enQueue(5);
+        $cir_queue->enQueue(8);
+        $cir_queue->enQueue(10);
+        $cir_queue->enQueue(15);//1,5,8,10,15
+        dump($cir_queue->deQueue($a));
+        dump($cir_queue->deQueue($b));
+        dump($cir_queue->deQueue($c));
+        dump($cir_queue->deQueue($d));
+        dump($cir_queue->deQueue($e));
+        echo $a,$b,$c,$d,$e;
+        dump($cir_queue->getLength());
+    }
+
+    public static function testLinkedQueue()
+    {
+        $cir_queue = new LinkedQueue();
+        $cir_queue->enQueue(1);
+        $cir_queue->enQueue(5);
+        $cir_queue->enQueue(8);
+        $cir_queue->enQueue(10);
+        $cir_queue->enQueue(15);//1,5,8,10,15
+        $cir_queue->enQueue(20);
+        $cir_queue->enQueue(25);
+        $cir_queue->enQueue(35);
+        $cir_queue->enQueue(45);
+        $cir_queue->enQueue(55);
+        $cir_queue->enQueue(65);//1,5,8,10,15,20,25,35,45,55,65
+        dump($cir_queue->deQueue($a));
+        dump($cir_queue->deQueue($b));
+        dump($cir_queue->deQueue($c));
+        dump($cir_queue->deQueue($d));
+        dump($cir_queue->deQueue($e));
+        echo $a,$b,$c,$d,$e;
+        dump($cir_queue->getLength());//20,25,35,45,55,65
+        dump($cir_queue);
     }
 }

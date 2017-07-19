@@ -19,7 +19,8 @@ $time1 = $micro_time->getMircoTime();
 
 //\DataStructure\Test::testDoubleLinkedList();
 //echo \algorithm\Other\Other::fbi(20);
-\DataStructure\Test::testLinkedStack();
+\DataStructure\Test::testCircularQueue();
+\DataStructure\Test::testLinkedQueue();
 $time2 = $micro_time->getMircoTime();
 
 echo '<br/><hr/>', 'cost time: ' . ($time2 - $time1) . ' s';
