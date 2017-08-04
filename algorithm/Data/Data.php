@@ -45,4 +45,17 @@ class Data
         }
         return array_values(array_unique(self::$arr));
     }
+
+    /**
+     * 生成斐波那契数
+     * @param int $k
+     * @return int
+     */
+    public static function fibonacci(int $k): int
+    {
+        if ($k == 0 || $k == 1)
+            return $k;
+        else
+            return self::fibonacci($k - 1) + self::fibonacci($k - 2);
+    }
 }

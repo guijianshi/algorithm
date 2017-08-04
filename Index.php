@@ -23,6 +23,9 @@ $time1 = $micro_time->getMircoTime();
 \DataStructure\Test::testLinkedQueue();
 $time2 = $micro_time->getMircoTime();
 
+$test = new \algorithm\Test\SearchTest();
+echo $test->fibonacci(10);
+
 echo '<br/><hr/>', 'cost time: ' . ($time2 - $time1) . ' s';
 
 function dump($data)
