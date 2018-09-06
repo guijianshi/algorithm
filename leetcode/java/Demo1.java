@@ -6,7 +6,7 @@ public class Demo1
 {
     public static void main(String[] args)
     {
-        int [] a = {3,2,3};
+        int[] a = {3, 2, 3};
         Demo1 demo1 = new Demo1();
         demo1.twoSum(a, 6);
 
@@ -14,6 +14,7 @@ public class Demo1
 
     /**
      * 暴力破解
+     *
      * @param nums
      * @param target
      * @return
@@ -34,9 +35,9 @@ public class Demo1
     }
 
 
-
     /**
      * 利用哈希表
+     *
      * @param nums
      * @param target
      * @return
