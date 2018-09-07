@@ -28,7 +28,6 @@ public class Demo4
             flag = true;
         }
         length = length / 2 + 1;
-
         int[] temp = new int[length];
         while (m < nums1.length || n < nums2.length) {
             if (n >= nums2.length || (m < nums1.length && nums1[m] < nums2[n])) {
