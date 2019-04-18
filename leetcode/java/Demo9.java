@@ -17,7 +17,7 @@ public class Demo9
 		System.out.println(isPalindrome(10));
 	}
 
-	public static boolean  isPalindrome(int x)
+	public static boolean isPalindrome(int x)
 	{
 		if (x < 0 || x % 10 == 0) {
 			return false;
