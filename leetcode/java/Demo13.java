@@ -2,21 +2,22 @@ public class Demo13
 {
     public static void main(String[] args)
     {
-        System.out.println(intToRoman(3999));
-        System.out.println(intToRoman(288));
+        System.out.println(romanToInt("LVIII"));
+        System.out.println(romanToInt("MCMXCIV"));
     }
 
-    private static String intToRoman(int num)
+    private static int romanToInt(String str)
     {
-        int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
-        String[] reps = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
-        StringBuilder result = new StringBuilder();
+        String[] values = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+        int[] reps = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+
+        int num = 0;
         for (int i = 0; i < values.length; i++) {
-            while (num >= values[i]) {
-                num -= values[i];
-                result.append(reps[i]);
+            while (str.startsWith(values[i])) {
+                num += reps[i];
+                str = str.substring(values[i].length());
             }
         }
-        return result.toString();
+        return num;
     }
 }
