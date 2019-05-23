@@ -12,10 +12,7 @@ public class Demo19
         node3.next = node4;
         node4.next = node5;
         ListNode node = removeNthFromEnd(node1, 1);
-        while (node != null) {
-            System.out.println(node.getVal());
-            node = node.next;
-        }
+        ListNode.printR(node);
     }
 
     /**
@@ -43,26 +40,5 @@ public class Demo19
         }
         currentNode.next = currentNode.next.next;
         return head;
-    }
-}
-
-class ListNode
-{
-    private int val;
-    ListNode next;
-
-    ListNode(int x)
-    {
-        val = x;
-    }
-
-    public int getVal()
-    {
-        return val;
-    }
-
-    public void setVal(int val)
-    {
-        this.val = val;
     }
 }
